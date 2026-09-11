@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <linearGradient id="accentRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="accentCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="480" rx="16" fill="url(#bgGrad2)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Header -->
+  <text x="40" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#f8fafc" letter-spacing="0.5">Interlocked Outbound Sales Engine with Reply-Watcher Loop</text>
+  <text x="40" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94a3b8">Self-Hosted n8n Docker Cluster | Real-time Gmail Polling (60s) | Fail-Closed CRM State Verification</text>
+
+  <!-- Flow Track 1: Outbound Cadence -->
+  <g transform="translate(40, 110)">
+    <rect width="400" height="150" rx="10" fill="url(#cardGrad2)" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="0" y="0" width="400" height="6" rx="3" fill="url(#accentCyan)"/>
+    <text x="20" y="32" font-family="sans-serif" font-size="11" font-weight="700" fill="#22d3ee" text-transform="uppercase">Lane 1: Multi-Touch Cadence</text>
+    <text x="20" y="55" font-family="sans-serif" font-size="14" font-weight="600" fill="#f8fafc">State-Gated Outbound Dispatch</text>
+    <text x="20" y="80" font-family="sans-serif" font-size="11" fill="#cbd5e1">1. Query Prospect from CRM Master Queue</text>
+    <text x="20" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">2. Pre-Flight State Check: [Status == "ACTIVE"]</text>
+    <text x="20" y="120" font-family="sans-serif" font-size="11" fill="#cbd5e1">3. Automated Personalized Email Dispatch</text>
+    <text x="20" y="140" font-family="sans-serif" font-size="11" fill="#cbd5e1">4. Enter Wait Node (3 Days) before Touch 2</text>
+  </g>
+
+  <!-- Central Interlock Mechanism -->
+  <g transform="translate(460, 150)">
+    <circle cx="20" cy="35" r="24" fill="#0f172a" stroke="#f87171" stroke-width="2"/>
+    <text x="12" y="41" font-family="sans-serif" font-size="18" font-weight="700" fill="#f87171">⚡</text>
+    <text x="-25" y="75" font-family="sans-serif" font-size="10" font-weight="600" fill="#fca5a5">State Interlock</text>
+  </g>
+
+  <!-- Flow Track 2: Real-time Reply Watcher -->
+  <g transform="translate(520, 110)">
+    <rect width="400" height="150" rx="10" fill="url(#cardGrad2)" stroke="#c084fc" stroke-width="1.5"/>
+    <rect x="0" y="0" width="400" height="6" rx="3" fill="url(#accentPurple)"/>
+    <text x="20" y="32" font-family="sans-serif" font-size="11" font-weight="700" fill="#c084fc" text-transform="uppercase">Lane 2: Async Reply Watcher</text>
+    <text x="20" y="55" font-family="sans-serif" font-size="14" font-weight="600" fill="#f8fafc">60-Second Polling &amp; Auto-Pause</text>
+    <text x="20" y="80" font-family="sans-serif" font-size="11" fill="#cbd5e1">1. Watch Gmail Thread ID for Inbound Message</text>
+    <text x="20" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">2. Match Sender to CRM Contact Ledger</text>
+    <text x="20" y="120" font-family="sans-serif" font-size="11" fill="#cbd5e1">3. Mutate State: [Status = "REPLIED"]</text>
+    <text x="20" y="140" font-family="sans-serif" font-size="11" fill="#cbd5e1">4. Alert Slack (#leads-and-alerts) for Human Takeover</text>
+  </g>
+
+  <!-- Bottom Proof Bar -->
+  <g transform="translate(40, 290)">
+    <rect width="880" height="150" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="25" y="35" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Engineered Operational Safeguards</text>
+
+    <g transform="translate(25, 55)">
+      <rect width="260" height="75" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="600" fill="#22d3ee">Zero Duplicate Outreaches</text>
+      <text x="15" y="44" font-family="sans-serif" font-size="10" fill="#94a3b8">Cadence re-verifies CRM state milliseconds</text>
+      <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#94a3b8">before dispatching any secondary touch.</text>
+    </g>
+
+    <g transform="translate(310, 55)">
+      <rect width="260" height="75" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="600" fill="#f87171">Auto-Bounce Quarantine</text>
+      <text x="15" y="44" font-family="sans-serif" font-size="10" fill="#94a3b8">Auto-detects hard/soft email bounces.</text>
+      <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#94a3b8">Protects domain sender reputation 100%.</text>
+    </g>
+
+    <g transform="translate(595, 55)">
+      <rect width="260" height="75" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="600" fill="#c084fc">Labor Reduction</text>
+      <text x="15" y="44" font-family="sans-serif" font-size="10" fill="#94a3b8">Eliminates 15+ hours/week of manual CRM</text>
+      <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#94a3b8">updates and inbox monitoring.</text>
+    </g>
+  </g>
+</svg>

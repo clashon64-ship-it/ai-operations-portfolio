@@ -11,32 +11,7 @@ I architect, deploy, and operationalize high-throughput AI infrastructure and en
 
 My work bridges client-facing forward deployed engineering and low-level systems architecture—combining **Python asyncio event loops**, **self-hosted n8n / Docker clusters**, **FastMCP tool servers**, **LLM-as-a-Judge validation pipelines**, and **cryptographically verifiable execution telemetry (SHA-256)**.
 
-```
-[ INBOUND ENTERPRISE EVENT ]
-               │
-               ▼
-   ┌───────────────────────┐
-   │ Asyncio Event Loop    │ ── (16,666+ events/sec peak, p50: 0.012ms)
-   └───────────────────────┘
-               │
-       ┌───────┴───────┐
-       ▼               ▼
-┌──────────────┐ ┌──────────────┐
-│ Deterministic│ │ LLM-as-Judge │
-│ Rules Engine │ │ Eval Gate    │
-└──────────────┘ └──────────────┘
-       │               │
-       └───────┬───────┘
-               ▼
-┌──────────────────────────────┐
-│ Self-Healing Action Engine   │ ── (FastMCP / n8n Docker / REST APIs)
-└──────────────────────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│ Cryptographic Audit Trail    │ ── (Deterministic SHA-256 Proof Log)
-└──────────────────────────────┘
-```
+![High-Throughput Multi-Node LLM Orchestration Pipeline](architecture-diagrams/01-asyncio-event-orchestration.svg)
 
 ---
 
@@ -55,6 +30,27 @@ python3 dashboard/server.py --port 8080
 ```
 Open **`http://127.0.0.1:8080`** in your browser to inspect the live interface, telemetry logs, and simulated agent dispatches.  
 *(You can also double-click `index.html` to view the dashboard offline in standalone simulation mode).*
+
+---
+
+## High-Fidelity Architecture Diagrams
+
+Visual system blueprints illustrating core data flows, state machines, and governance gates:
+
+| Blueprint | System Focus | Key Architectural Mechanism |
+| :--- | :--- | :--- |
+| **[01. Asyncio Event Orchestrator](architecture-diagrams/01-asyncio-event-orchestration.svg)** | Event Loop & LLM Scoring | 31,207+ events/sec throughput, p50: 0.024ms, LLM-as-Judge (>8.5 rubric) |
+| **[02. Interlocked Sales Engine](architecture-diagrams/02-interlocked-sales-reply-watcher.svg)** | Asynchronous Outbound & Inbound | 60s Gmail polling, CRM state verification, instant auto-pause on reply |
+| **[03. Document Parsing & HITL](architecture-diagrams/03-document-parsing-hitl-pipeline.svg)** | Multi-Modal Ledger Intake | 0.90 confidence scoring gate, math reconciliation, Slack 1-click triage |
+
+---
+
+## Production n8n Workflow Templates (Sanitized)
+
+Ready-to-import enterprise automation schemas located in [`workflows/`](workflows/README.md):
+
+* **[`workflows/01-interlocked-sales-reply-watcher.n8n.json`](workflows/01-interlocked-sales-reply-watcher.n8n.json)**: Production outbound sales cadence with real-time Gmail inbox listener, auto-pause logic on prospect reply, and automated bounce handling.
+* **[`workflows/02-document-intelligence-hitl.n8n.json`](workflows/02-document-intelligence-hitl.n8n.json)**: Multi-modal document ingestion pipeline with automated math balance verification, 0.90 confidence score split, and Slack exception alerts.
 
 ---
 

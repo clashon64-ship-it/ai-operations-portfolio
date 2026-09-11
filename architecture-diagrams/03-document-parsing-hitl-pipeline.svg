@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cardGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accentEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="accentOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="accentIndigo" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="480" rx="16" fill="url(#bgGrad3)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Header -->
+  <text x="40" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#f8fafc" letter-spacing="0.5">Intelligent Document Extraction &amp; Human-in-the-Loop Triage</text>
+  <text x="40" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94a3b8">Multi-Modal Document Parsing | Confidence Score Routing (Threshold: 0.90) | Zero-Defect Accounting Ledger</text>
+
+  <!-- Step 1: Document Ingestion -->
+  <g transform="translate(40, 110)">
+    <rect width="250" height="150" rx="10" fill="url(#cardGrad3)" stroke="#818cf8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="250" height="6" rx="3" fill="url(#accentIndigo)"/>
+    <text x="20" y="32" font-family="sans-serif" font-size="11" font-weight="700" fill="#818cf8" text-transform="uppercase">Phase 1: Ingestion</text>
+    <text x="20" y="55" font-family="sans-serif" font-size="14" font-weight="600" fill="#f8fafc">Multi-Format Extraction</text>
+    <text x="20" y="80" font-family="sans-serif" font-size="11" fill="#cbd5e1">• PDF, TIFF, PNG Ingestion</text>
+    <text x="20" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Structured JSON Schema Norm</text>
+    <text x="20" y="120" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Field-Level Telemetry Metrics</text>
+    <rect x="20" y="130" width="70" height="14" rx="3" fill="#312e81"/>
+    <text x="25" y="141" font-family="sans-serif" font-size="9" font-weight="600" fill="#c7d2fe">JSON Strict</text>
+  </g>
+
+  <!-- Arrow to Split -->
+  <path d="M 290 185 L 340 185" stroke="#818cf8" stroke-width="2"/>
+  <polygon points="345,185 337,180 337,190" fill="#818cf8"/>
+
+  <!-- Step 2: Decision Split -->
+  <g transform="translate(350, 110)">
+    <rect width="260" height="150" rx="10" fill="url(#cardGrad3)" stroke="#f97316" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="6" rx="3" fill="url(#accentOrange)"/>
+    <text x="20" y="32" font-family="sans-serif" font-size="11" font-weight="700" fill="#f97316" text-transform="uppercase">Phase 2: Evaluation</text>
+    <text x="20" y="55" font-family="sans-serif" font-size="14" font-weight="600" fill="#f8fafc">Confidence Scoring Gate</text>
+    <text x="20" y="80" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Vendor &amp; Invoice Match</text>
+    <text x="20" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Line Items Math Check</text>
+    <text x="20" y="120" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Threshold &gt;= 0.90: Auto-Approve</text>
+    <rect x="20" y="130" width="85" height="14" rx="3" fill="#7c2d12"/>
+    <text x="25" y="141" font-family="sans-serif" font-size="9" font-weight="600" fill="#ffedd5">Gate Sentinel</text>
+  </g>
+
+  <!-- Split Outputs -->
+  <!-- Upper: High Confidence Auto Sync -->
+  <path d="M 610 150 L 660 135" stroke="#10b981" stroke-width="2"/>
+  <polygon points="665,135 656,131 658,141" fill="#10b981"/>
+
+  <!-- Lower: Low Confidence Human Triage -->
+  <path d="M 610 220 L 660 235" stroke="#f97316" stroke-width="2"/>
+  <polygon points="665,235 658,229 656,239" fill="#f97316"/>
+
+  <!-- Step 3A: Auto-Sync -->
+  <g transform="translate(670, 70)">
+    <rect width="250" height="85" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="700" fill="#34d399">HIGH CONFIDENCE (>=0.90)</text>
+    <text x="15" y="44" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Direct Master Sync</text>
+    <text x="15" y="64" font-family="sans-serif" font-size="10" fill="#a7f3d0">Instant write to accounting ledger &amp; DB</text>
+  </g>
+
+  <!-- Step 3B: Human Review -->
+  <g transform="translate(670, 175)">
+    <rect width="250" height="85" rx="8" fill="#431407" stroke="#f97316" stroke-width="1.5"/>
+    <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="700" fill="#fdba74">ANOMALY DETECTED (&lt;0.90)</text>
+    <text x="15" y="44" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8fafc">Slack HITL Triage Queue</text>
+    <text x="15" y="64" font-family="sans-serif" font-size="10" fill="#fed7aa">1-Click approve / edit UI dispatch</text>
+  </g>
+
+  <!-- Bottom Architecture Metrics -->
+  <g transform="translate(40, 290)">
+    <rect width="880" height="150" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="25" y="35" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Operational Impact &amp; Accuracy Guarantees</text>
+
+    <g transform="translate(25, 55)">
+      <rect width="260" height="75" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="600" fill="#10b981">75% Manual Labor Cut</text>
+      <text x="15" y="44" font-family="sans-serif" font-size="10" fill="#94a3b8">Routine invoices auto-commit instantly</text>
+      <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#94a3b8">without touching a human keyboard.</text>
+    </g>
+
+    <g transform="translate(310, 55)">
+      <rect width="260" height="75" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="600" fill="#f97316">100% Data Integrity</text>
+      <text x="15" y="44" font-family="sans-serif" font-size="10" fill="#94a3b8">Zero corrupted data enters production;</text>
+      <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#94a3b8">all anomalies held in staging quarantine.</text>
+    </g>
+
+    <g transform="translate(595, 55)">
+      <rect width="260" height="75" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="11" font-weight="600" fill="#818cf8">Audit Compliance</text>
+      <text x="15" y="44" font-family="sans-serif" font-size="10" fill="#94a3b8">Every decision, confidence score, and</text>
+      <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#94a3b8">human override stamped with SHA-256 log.</text>
+    </g>
+  </g>
+</svg>

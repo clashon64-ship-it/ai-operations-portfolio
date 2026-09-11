@@ -1,0 +1,214 @@
+{
+  "name": "Production Interlocked Outbound Sales Engine & Reply Watcher",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "q": "is:unread -from:me"
+        }
+      },
+      "id": "node-gmail-trigger",
+      "name": "Gmail Reply Poller (60s)",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "CREDENTIAL_ID_PLACEHOLDER",
+          "name": "Gmail Production OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "lookup",
+        "sheetId": "CRM_MASTER_SPREADSHEET_ID",
+        "lookupColumn": "Email",
+        "lookupValue": "={{ $json.from.value[0].address }}",
+        "range": "Prospects!A:G"
+      },
+      "id": "node-crm-lookup",
+      "name": "Lookup Prospect in CRM",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "credentials": {
+        "googleSheetsOAuth2": {
+          "id": "CREDENTIAL_ID_PLACEHOLDER",
+          "name": "Google Sheets CRM OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ !!$json.Email }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "node-if-prospect",
+      "name": "Is Known Prospect?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('Gmail Reply Poller (60s)').item.json.snippet.toLowerCase() }}",
+              "operation": "contains",
+              "value2": "delivery status notification"
+            }
+          ]
+        }
+      },
+      "id": "node-if-bounce",
+      "name": "Is Email Bounce?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "sheetId": "CRM_MASTER_SPREADSHEET_ID",
+        "key": "Email",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "BOUNCED",
+            "AutoCadenceActive": false,
+            "LastEventTimestamp": "={{ $now.toISO() }}"
+          }
+        },
+        "range": "Prospects!A:G"
+      },
+      "id": "node-mark-bounced",
+      "name": "Quarantine Bounced Prospect",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1120, 100]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "sheetId": "CRM_MASTER_SPREADSHEET_ID",
+        "key": "Email",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "REPLIED",
+            "AutoCadenceActive": false,
+            "LastEventTimestamp": "={{ $now.toISO() }}"
+          }
+        },
+        "range": "Prospects!A:G"
+      },
+      "id": "node-mark-replied",
+      "name": "Auto-Halt Cadence (Replied)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#leads-and-alerts",
+        "text": "=:bell: *HOT LEAD INBOUND REPLY DETECTED*\n*Prospect:* {{ $('Lookup Prospect in CRM').item.json.FirstName }} {{ $('Lookup Prospect in CRM').item.json.LastName }} ({{ $('Lookup Prospect in CRM').item.json.Company }})\n*Email:* {{ $('Gmail Reply Poller (60s)').item.json.from.value[0].address }}\n*Snippet:* _{{ $('Gmail Reply Poller (60s)').item.json.snippet }}_ \n*Action Taken:* Cadence halted instantly. CRM state updated to `REPLIED`.\n*Immediate Action:* Human takeover required.",
+        "attachments": []
+      },
+      "id": "node-slack-alert",
+      "name": "Notify Ops Channel (Slack)",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [1340, 300],
+      "credentials": {
+        "slackApi": {
+          "id": "CREDENTIAL_ID_PLACEHOLDER",
+          "name": "Slack Operations Bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Gmail Reply Poller (60s)": {
+      "main": [
+        [
+          {
+            "node": "Lookup Prospect in CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Prospect in CRM": {
+      "main": [
+        [
+          {
+            "node": "Is Known Prospect?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Known Prospect?": {
+      "main": [
+        [
+          {
+            "node": "Is Email Bounce?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Email Bounce?": {
+      "main": [
+        [
+          {
+            "node": "Quarantine Bounced Prospect",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Auto-Halt Cadence (Replied)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-Halt Cadence (Replied)": {
+      "main": [
+        [
+          {
+            "node": "Notify Ops Channel (Slack)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  }
+}

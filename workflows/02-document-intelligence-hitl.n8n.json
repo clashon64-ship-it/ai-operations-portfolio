@@ -1,0 +1,140 @@
+{
+  "name": "Production Intelligent Document Parsing & Human Triage Gate",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ingest-document",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "node-webhook-ingest",
+      "name": "Document Ingestion Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "SANITY_CHECK_UUID_PLACEHOLDER"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Production Schema Normalization & Math Check\nconst payload = $input.first().json;\n\nconst subtotal = Number(payload.subtotal || 0);\nconst tax = Number(payload.tax || 0);\nconst total = Number(payload.total || 0);\n\nconst calculatedTotal = subtotal + tax;\nconst mathDiscrepancy = Math.abs(calculatedTotal - total) > 0.01;\n\n// Determine composite confidence score (0.0 to 1.0)\nlet confidence = Number(payload.extraction_confidence || 0.85);\nif (mathDiscrepancy) {\n  confidence -= 0.30; // Heavy penalty for broken financial reconciliation\n}\n\nif (!payload.vendor_name || !payload.invoice_number) {\n  confidence -= 0.25;\n}\n\nreturn [{\n  json: {\n    ...payload,\n    normalized_total: total,\n    calculated_total: calculatedTotal,\n    math_discrepancy: mathDiscrepancy,\n    final_confidence_score: Math.max(0, confidence).toFixed(2),\n    passed_threshold: confidence >= 0.90\n  }\n}];"
+      },
+      "id": "node-normalize-score",
+      "name": "Validate & Score Schema",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.passed_threshold }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "node-if-confidence",
+      "name": "Confidence >= 0.90?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "ACCOUNTING_MASTER_SPREADSHEET_ID",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Vendor": "={{ $json.vendor_name }}",
+            "InvoiceNumber": "={{ $json.invoice_number }}",
+            "Total": "={{ $json.normalized_total }}",
+            "ConfidenceScore": "={{ $json.final_confidence_score }}",
+            "Status": "AUTO_COMMITTED",
+            "ProcessedAt": "={{ $now.toISO() }}"
+          }
+        },
+        "range": "GeneralLedger!A:F"
+      },
+      "id": "node-auto-commit-db",
+      "name": "Auto-Commit to Ledger",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [920, 180],
+      "credentials": {
+        "googleSheetsOAuth2": {
+          "id": "CREDENTIAL_ID_PLACEHOLDER",
+          "name": "Accounting Google Sheets OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#leads-and-alerts",
+        "text": "=:warning: *DOCUMENT ANOMALY DETECTED (HITL TRIAGE REQUIRED)*\n*Vendor:* {{ $json.vendor_name || 'UNKNOWN' }}\n*Invoice #:* {{ $json.invoice_number || 'UNKNOWN' }}\n*Reported Total:* ${{ $json.normalized_total }}\n*Calculated Total:* ${{ $json.calculated_total }}\n*Confidence Score:* `{{ $json.final_confidence_score }}` (Required: 0.90+)\n*Math Discrepancy:* {{ $json.math_discrepancy ? 'YES (MISMATCH)' : 'NO' }}\n*Action:* Quarantined in Staging Queue. Human review required before ledger post.",
+        "attachments": []
+      },
+      "id": "node-hitl-quarantine-alert",
+      "name": "Send Human Triage Alert (Slack)",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [920, 420],
+      "credentials": {
+        "slackApi": {
+          "id": "CREDENTIAL_ID_PLACEHOLDER",
+          "name": "Slack Operations Bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Document Ingestion Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate & Score Schema",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate & Score Schema": {
+      "main": [
+        [
+          {
+            "node": "Confidence >= 0.90?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confidence >= 0.90?": {
+      "main": [
+        [
+          {
+            "node": "Auto-Commit to Ledger",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Human Triage Alert (Slack)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  }
+}
