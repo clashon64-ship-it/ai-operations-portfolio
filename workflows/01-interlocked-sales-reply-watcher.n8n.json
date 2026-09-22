@@ -18,7 +18,10 @@
       "name": "Gmail Reply Poller (60s)",
       "type": "n8n-nodes-base.gmailTrigger",
       "typeVersion": 1,
-      "position": [240, 300],
+      "position": [
+        240,
+        300
+      ],
       "credentials": {
         "gmailOAuth2": {
           "id": "CREDENTIAL_ID_PLACEHOLDER",
@@ -37,8 +40,11 @@
       "id": "node-crm-lookup",
       "name": "Lookup Prospect in CRM",
       "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4,
-      "position": [460, 300],
+      "typeVersion": 4.5,
+      "position": [
+        460,
+        300
+      ],
       "credentials": {
         "googleSheetsOAuth2": {
           "id": "CREDENTIAL_ID_PLACEHOLDER",
@@ -60,8 +66,11 @@
       "id": "node-if-prospect",
       "name": "Is Known Prospect?",
       "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [680, 300]
+      "typeVersion": 2.2,
+      "position": [
+        680,
+        300
+      ]
     },
     {
       "parameters": {
@@ -78,8 +87,11 @@
       "id": "node-if-bounce",
       "name": "Is Email Bounce?",
       "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [900, 200]
+      "typeVersion": 2.2,
+      "position": [
+        900,
+        200
+      ]
     },
     {
       "parameters": {
@@ -99,8 +111,11 @@
       "id": "node-mark-bounced",
       "name": "Quarantine Bounced Prospect",
       "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4,
-      "position": [1120, 100]
+      "typeVersion": 4.5,
+      "position": [
+        1120,
+        100
+      ]
     },
     {
       "parameters": {
@@ -120,8 +135,11 @@
       "id": "node-mark-replied",
       "name": "Auto-Halt Cadence (Replied)",
       "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4,
-      "position": [1120, 300]
+      "typeVersion": 4.5,
+      "position": [
+        1120,
+        300
+      ]
     },
     {
       "parameters": {
@@ -132,8 +150,11 @@
       "id": "node-slack-alert",
       "name": "Notify Ops Channel (Slack)",
       "type": "n8n-nodes-base.slack",
-      "typeVersion": 2.1,
-      "position": [1340, 300],
+      "typeVersion": 2.2,
+      "position": [
+        1340,
+        300
+      ],
       "credentials": {
         "slackApi": {
           "id": "CREDENTIAL_ID_PLACEHOLDER",

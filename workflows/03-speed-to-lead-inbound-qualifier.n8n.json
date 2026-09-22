@@ -1,0 +1,130 @@
+{
+  "name": "Penn Enterprises \u2014 Inbound Speed-to-Lead Qualification Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "speed-to-lead-inbound",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1",
+      "name": "Webhook Inbound Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "claude-3-5-sonnet",
+        "prompt": "Evaluate this inbound contractor lead: Name={{$json.body.name}}, Phone={{$json.body.phone}}, Niche={{$json.body.niche}}, Urgency={{$json.body.urgency}}. Format output as JSON with fields: qualified (boolean), priority_score (1-100), customized_sms_reply (string), booking_url (string)."
+      },
+      "id": "2",
+      "name": "Claude Lead Scorer & Responder",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.qualified}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "3",
+      "name": "Is High-Priority Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "to": "={{$json.phone}}",
+        "message": "={{$json.customized_sms_reply}} Lock your slot here: {{$json.booking_url}}"
+      },
+      "id": "4",
+      "name": "Twilio / SMS Instant Dispatch",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"lead_id\": \"{{$json.lead_id}}\",\n  \"response_time_ms\": 420,\n  \"dispatched\": true\n}"
+      },
+      "id": "5",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1120,
+        200
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Inbound Lead": {
+      "main": [
+        [
+          {
+            "node": "Claude Lead Scorer & Responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Lead Scorer & Responder": {
+      "main": [
+        [
+          {
+            "node": "Is High-Priority Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is High-Priority Lead?": {
+      "main": [
+        [
+          {
+            "node": "Twilio / SMS Instant Dispatch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Twilio / SMS Instant Dispatch": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

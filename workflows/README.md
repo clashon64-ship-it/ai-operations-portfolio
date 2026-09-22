@@ -25,6 +25,15 @@ This directory contains battle-tested, sanitized workflow exports from live ente
   * Low confidence or math anomaly (`< 0.90`): Quarantines the record and dispatches an interactive Slack triage alert for human review.
 * **Case Study Reference:** [03 - Intelligent Document Parsing & HITL Review](../case-studies/03-intelligent-document-parsing-hitl.md)
 
+### 3. `03-speed-to-lead-inbound-qualifier.n8n.json`
+* **Architecture:** Sub-3-second real-time webhook ingestion, validation, and multi-channel notification engine.
+* **Key Mechanisms:**
+  * Ingests raw inbound leads from webhooks/forms instantly (<3s latency).
+  * Validates and cleans phone numbers (E.164 format) and business email domains.
+  * Qualifies high-intent budget signals before routing.
+  * Dispatches high-priority Slack notifications to `#leads-and-alerts` and SMS trigger to sales reps.
+* **Case Study Reference:** [05 - Real-Time Speed-to-Lead Qualification](../case-studies/05-realtime-speed-to-lead-qualification.md)
+
 ---
 
 ## How to Import into n8n
