@@ -1,23 +1,24 @@
-# AI Operations & Forward Deployed Systems Engineering Portfolio
+# Enterprise AI Operations & Workflow Engineering Portfolio
 
-**Keymon Penn** | AI Operations & Forward Deployed Systems Engineer  
-San Diego, CA (Remote) | [LinkedIn](https://www.linkedin.com/in/keymon-penn) | [Email](mailto:kp@pennenterprisesllc.com)
+**Keymon Penn** | AI Operations & Automation Systems Engineer  
+San Diego State University (SDSU) Cybersecurity Studies | San Diego, CA (Remote)  
+[GitHub Profile](https://github.com/clashon64-ship-it) | [LinkedIn](https://www.linkedin.com/in/keymon-penn) | [Email](mailto:kp@pennenterprisesllc.com)
 
 ---
 
 ## Executive Summary
 
-I architect, deploy, and operationalize high-throughput AI infrastructure and enterprise workflow automation systems that don't collapse under production stress. 
+I build, deploy, and monitor production AI operations and enterprise workflow automation systems that eliminate manual bottlenecks and operate with fail-closed reliability.
 
-My work bridges client-facing forward deployed engineering and low-level systems architecture—combining **Python asyncio event loops**, **self-hosted n8n / Docker clusters**, **FastMCP tool servers**, **LLM-as-a-Judge validation pipelines**, and **cryptographically verifiable execution telemetry (SHA-256)**.
+Drawing from my **SDSU Cybersecurity background**, I focus on building resilient systems rather than fragile toy prototypes: combining **Python event loops**, **self-hosted n8n and Docker clusters**, **asynchronous webhook routers**, **automated LLM evaluation gates**, and **tamper-proof execution audit logs**.
 
-![High-Throughput Multi-Node LLM Orchestration Pipeline](architecture-diagrams/01-asyncio-event-orchestration.svg)
+![Enterprise Operations OS Dashboard](dashboard-mockup-preview.png)
 
 ---
 
 ## Interactive Enterprise Operations Dashboard
 
-This repository includes the complete, sanitized **Penn Enterprises Operating OS Dashboard** (`index.html`), featuring live metric cards, real-time pipeline telemetry, infrastructure health monitoring, and an interactive terminal console.
+This repository includes the complete, sanitized **Penn Enterprises Operating OS Dashboard** (`index.html`), featuring live system metric cards, real-time pipeline telemetry, infrastructure health monitoring, and an interactive terminal console.
 
 ### How to Run the Dashboard Locally:
 ```bash
@@ -91,7 +92,7 @@ python3 benchmarks/asyncio_orchestrator_benchmark.py
 **Verified Benchmark Output:**
 ```
 ======================================================================
-  PENN ENTERPRISES LLC — ASYNCIO ORCHESTRATOR BENCHMARK SUITE
+  PENN ENTERPRISES LLC: ASYNCIO ORCHESTRATOR BENCHMARK SUITE
 ======================================================================
 [Config] Total Events: 250 | Concurrency: 25 workers
 [Run] Dispatching asynchronous workloads through 5-node agent pipeline...
