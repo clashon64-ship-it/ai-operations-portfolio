@@ -1,0 +1,333 @@
+{
+  "name": "Penn Founder OS — Morning Accountability V1",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "node-trigger-schedule",
+      "name": "TRIGGER — Morning Founder OS",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [180, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "primary_skill_gap",
+              "value": "sales/outreach"
+            },
+            {
+              "name": "secondary_skill_gap",
+              "value": "enterprise terminology"
+            },
+            {
+              "name": "primary_productivity_risk",
+              "value": "unnecessary tool/model switching"
+            }
+          ],
+          "number": [
+            {
+              "name": "income_floor_monthly",
+              "value": 3000
+            },
+            {
+              "name": "income_comfort_low",
+              "value": 6000
+            },
+            {
+              "name": "income_comfort_high",
+              "value": 8000
+            },
+            {
+              "name": "job_action_floor",
+              "value": 5
+            },
+            {
+              "name": "business_outreach_floor",
+              "value": 5
+            },
+            {
+              "name": "followup_floor",
+              "value": 3
+            },
+            {
+              "name": "deep_work_min_hours",
+              "value": 3
+            },
+            {
+              "name": "deep_work_max_hours",
+              "value": 4
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-state-profile",
+      "name": "STATE — Founder Profile",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [380, 160]
+    },
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "job_actions",
+              "value": 4
+            },
+            {
+              "name": "business_outreach",
+              "value": 5
+            },
+            {
+              "name": "followups",
+              "value": 1
+            },
+            {
+              "name": "unjustified_model_switches",
+              "value": 3
+            },
+            {
+              "name": "daily_score",
+              "value": 4
+            }
+          ],
+          "boolean": [
+            {
+              "name": "learning_completed",
+              "value": true
+            },
+            {
+              "name": "build_proof_completed",
+              "value": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-state-yesterday",
+      "name": "STATE — Yesterday Scorecard",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [380, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      company: \"Anthropic Ecosystem Partner\",\n      role: \"AI Solutions Engineer\",\n      stage: \"screening\",\n      priority: \"P1\",\n      next_action: \"Submit customized enterprise case study receipt\",\n      next_action_date: new Date().toISOString().split('T')[0]\n    }\n  },\n  {\n    json: {\n      company: \"Scale Automation Group\",\n      role: \"Workflow Architect\",\n      stage: \"applied\",\n      priority: \"P2\",\n      next_action: \"Follow up with lead architect on LinkedIn\",\n      next_action_date: new Date().toISOString().split('T')[0]\n    }\n  }\n];"
+      },
+      "id": "node-state-jobs",
+      "name": "STATE — Jobs Due",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [380, 440]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      company: \"Peak Builders SD\",\n      contact: \"Dane\",\n      stage: \"diagnostic_sent\",\n      problem_hypothesis: \"Manual lead intake latency (>4 hours) losing high-ticket kitchen remodeling inquiries\",\n      next_action: \"Confirm diagnostic screen share review slot (cal.com/pennenterprises/15min)\",\n      next_action_date: new Date().toISOString().split('T')[0]\n    }\n  },\n  {\n    json: {\n      company: \"Creative Design & Build\",\n      contact: \"Claire\",\n      stage: \"diagnostic_sent\",\n      problem_hypothesis: \"Weekend ad leads sitting unresponded on Meta ads\",\n      next_action: \"Deliver Speed-to-Lead ROI calculator link\",\n      next_action_date: new Date().toISOString().split('T')[0]\n    }\n  }\n];"
+      },
+      "id": "node-state-prospects",
+      "name": "STATE — Prospects Due",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [380, 580]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "concept",
+              "value": "SLA (Service Level Agreement) Guarantees & Penalties in Enterprise Workflows"
+            },
+            {
+              "name": "status",
+              "value": "queued"
+            },
+            {
+              "name": "category",
+              "value": "operations"
+            }
+          ],
+          "number": [
+            {
+              "name": "mastery_score",
+              "value": 0
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-state-learning",
+      "name": "STATE — Learning Queue",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [380, 720]
+    },
+    {
+      "parameters": {
+        "jsCode": "const profile = $('STATE — Founder Profile').first().json;\nconst yesterday = $('STATE — Yesterday Scorecard').first().json;\nconst jobs = $('STATE — Jobs Due').all().map(i => i.json);\nconst prospects = $('STATE — Prospects Due').all().map(i => i.json);\nconst learning = $('STATE — Learning Queue').first().json;\n\nconst warnings = [];\n\nif ((yesterday.unjustified_model_switches || 0) >= 2) {\n  warnings.push('Tool/model switching exceeded operating tolerance yesterday.');\n}\n\nif ((yesterday.business_outreach || 0) < profile.business_outreach_floor) {\n  warnings.push('Business development floor was missed yesterday.');\n}\n\nif (!yesterday.build_proof_completed) {\n  warnings.push('Yesterday did not produce a completed technical proof point.');\n}\n\nconst today = new Date().toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    date: today,\n    income: {\n      floor: profile.income_floor_monthly,\n      comfort_target: `${profile.income_comfort_low}-${profile.income_comfort_high}`\n    },\n    career: {\n      daily_floor: profile.job_action_floor,\n      due_actions: jobs\n    },\n    sales: {\n      new_outreach_floor: profile.business_outreach_floor,\n      followup_floor: profile.followup_floor,\n      followups_due: prospects\n    },\n    learning: {\n      concept: learning.concept\n    },\n    performance: {\n      yesterday_score: yesterday.daily_score,\n      warnings: warnings\n    },\n    deep_work_capacity: `${profile.deep_work_min_hours}-${profile.deep_work_max_hours} hours`\n  }\n}];"
+      },
+      "id": "node-code-engine",
+      "name": "CODE — Daily Requirements Engine & Merge Packet",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [620, 440]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the prioritization layer for Penn Enterprises Founder OS.\n\nYou may:\n- prioritize existing obligations\n- propose sequencing\n- identify the primary bottleneck\n- create a concise morning plan\n- recommend what NOT to work on\n\nYou may NOT:\n- alter daily minimums\n- invent pipeline records\n- claim work has been completed\n- change income targets\n- create new factual state\n- waive obligations\n\nUse only the supplied operating packet:\n{{ JSON.stringify($json) }}\n\nReturn ONLY a valid JSON object matching this schema:\n{\n  \"primary_outcome\": \"string\",\n  \"career_plan\": [\"string\", \"string\"],\n  \"revenue_plan\": [\"string\", \"string\"],\n  \"learning_focus\": \"string\",\n  \"build_focus\": \"string\",\n  \"deep_work_plan\": {\n    \"career_minutes\": 90,\n    \"sales_minutes\": 60,\n    \"build_minutes\": 90\n  },\n  \"do_not_do\": \"string\",\n  \"reasoning_summary\": \"string\"\n}"
+      },
+      "id": "node-llm-prioritizer",
+      "name": "LLM — Morning Prioritizer",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [840, 440]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "gemini-2.5-flash"
+        },
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "node-model-gemini",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [840, 640]
+    },
+    {
+      "parameters": {
+        "jsCode": "const packet = $('CODE — Daily Requirements Engine & Merge Packet').first().json;\nlet rawResponse = $json.text || $json.response || $json;\n\nlet brief = null;\ntry {\n  if (typeof rawResponse === 'string') {\n    // Strip markdown code fences if present\n    const clean = rawResponse.replace(/```json/g, '').replace(/```/g, '').trim();\n    brief = JSON.parse(clean);\n  } else {\n    brief = rawResponse;\n  }\n} catch (e) {\n  brief = null;\n}\n\n// Deterministic Fallback if model fails or outputs invalid format\nif (!brief || !brief.primary_outcome || !Array.isArray(brief.career_plan) || !Array.isArray(brief.revenue_plan)) {\n  brief = {\n    primary_outcome: \"Generate commercial opportunities and execute career obligations before discretionary building.\",\n    career_plan: [\n      `${packet.career.daily_floor} targeted enterprise career actions`,\n      `${packet.career.due_actions.length} scheduled recruiter follow-ups`\n    ],\n    revenue_plan: [\n      `${packet.sales.new_outreach_floor} fresh contractor outreach touches`,\n      `${packet.sales.followups_due.length} active prospect follow-ups`\n    ],\n    learning_focus: packet.learning.concept,\n    build_focus: \"Complete verification receipt for Publishing Control Plane.\",\n    deep_work_plan: {\n      career_minutes: 90,\n      sales_minutes: 60,\n      build_minutes: 90\n    },\n    do_not_do: \"Unnecessary tool/model switching or speculative new project setup.\",\n    reasoning_summary: packet.performance.warnings.join(' ') || \"Execution baseline enforcement.\",\n    is_fallback: true\n  };\n}\n\n// Format Slack message blocks\nconst slackText = `*PENN FOUNDER OS — MORNING COMMAND*\n\n*PRIMARY OUTCOME*\n${brief.primary_outcome}\n\n*CAREER*\n• ${packet.career.daily_floor} serious career actions required\n• ${packet.career.due_actions.length} existing follow-ups due\n\n*REVENUE*\n• ${packet.sales.new_outreach_floor} qualified new contacts required\n• ${packet.sales.followups_due.length} prospect follow-ups due\n\n*LEARNING*\n${brief.learning_focus}\n\n*BUILD*\n${brief.build_focus}\n\n*DEEP WORK*\n${brief.deep_work_plan.career_minutes}m Career | ${brief.deep_work_plan.sales_minutes}m Sales | ${brief.deep_work_plan.build_minutes}m Build\n\n*GUARDRAIL*\nNo unnecessary model switching.\n\n*DO NOT WORK ON*\n${brief.do_not_do}\n\n──────────────────────────────────────\n*Keymon:* What is your #1 commitment for today?`;\n\nreturn [{\n  json: {\n    brief: brief,\n    slack_formatted_message: slackText,\n    warnings: packet.performance.warnings\n  }\n}];"
+      },
+      "id": "node-validate-brief",
+      "name": "VALIDATE — Brief Contract & Formatter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1060, 440]
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "channel": "#personal-command",
+        "message": "={{ $json.slack_formatted_message }}",
+        "responseType": "text",
+        "options": {}
+      },
+      "id": "node-slack-send-wait",
+      "name": "SLACK — Send + Wait for Response",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [1280, 440]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $json.response || $json.text || \"\";\nconst isValid = response.trim().length >= 15;\n\nreturn [{\n  json: {\n    date: new Date().toISOString().split('T')[0],\n    primary_commitment: response.trim(),\n    is_valid_commitment: isValid,\n    committed_at: new Date().toISOString(),\n    status: isValid ? \"active\" : \"flagged_insufficient\",\n    morning_brief_sent: true,\n    commitment_received: true\n  }\n}];"
+      },
+      "id": "node-validate-commitment",
+      "name": "VALIDATE — Commitment Filter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1500, 440]
+    },
+    {
+      "parameters": {
+        "jsCode": "const commitment = $json;\n// Persist locally or append to log/receipt\nreturn [{\n  json: {\n    ...commitment,\n    contract_sealed: true,\n    receipt_path: `operations/receipts/${commitment.date}_receipt_founder_os_morning_commitment.json`\n  }\n}];"
+      },
+      "id": "node-write-commitment",
+      "name": "WRITE — Daily Commitment Ledger",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1720, 440]
+    }
+  ],
+  "connections": {
+    "TRIGGER — Morning Founder OS": {
+      "main": [
+        [
+          { "node": "STATE — Founder Profile", "type": "main", "index": 0 },
+          { "node": "STATE — Yesterday Scorecard", "type": "main", "index": 0 },
+          { "node": "STATE — Jobs Due", "type": "main", "index": 0 },
+          { "node": "STATE — Prospects Due", "type": "main", "index": 0 },
+          { "node": "STATE — Learning Queue", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "STATE — Founder Profile": {
+      "main": [
+        [{ "node": "CODE — Daily Requirements Engine & Merge Packet", "type": "main", "index": 0 }]
+      ]
+    },
+    "STATE — Yesterday Scorecard": {
+      "main": [
+        [{ "node": "CODE — Daily Requirements Engine & Merge Packet", "type": "main", "index": 0 }]
+      ]
+    },
+    "STATE — Jobs Due": {
+      "main": [
+        [{ "node": "CODE — Daily Requirements Engine & Merge Packet", "type": "main", "index": 0 }]
+      ]
+    },
+    "STATE — Prospects Due": {
+      "main": [
+        [{ "node": "CODE — Daily Requirements Engine & Merge Packet", "type": "main", "index": 0 }]
+      ]
+    },
+    "STATE — Learning Queue": {
+      "main": [
+        [{ "node": "CODE — Daily Requirements Engine & Merge Packet", "type": "main", "index": 0 }]
+      ]
+    },
+    "CODE — Daily Requirements Engine & Merge Packet": {
+      "main": [
+        [{ "node": "LLM — Morning Prioritizer", "type": "main", "index": 0 }]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [{ "node": "LLM — Morning Prioritizer", "type": "ai_languageModel", "index": 0 }]
+      ]
+    },
+    "LLM — Morning Prioritizer": {
+      "main": [
+        [{ "node": "VALIDATE — Brief Contract & Formatter", "type": "main", "index": 0 }]
+      ]
+    },
+    "VALIDATE — Brief Contract & Formatter": {
+      "main": [
+        [{ "node": "SLACK — Send + Wait for Response", "type": "main", "index": 0 }]
+      ]
+    },
+    "SLACK — Send + Wait for Response": {
+      "main": [
+        [{ "node": "VALIDATE — Commitment Filter", "type": "main", "index": 0 }]
+      ]
+    },
+    "VALIDATE — Commitment Filter": {
+      "main": [
+        [{ "node": "WRITE — Daily Commitment Ledger", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Los_Angeles"
+  }
+}
