@@ -66,6 +66,7 @@ Ready-to-import enterprise automation schemas located in [`workflows/`](workflow
 | **05** | **[Real-Time Speed-to-Lead Ingestion & ICP Scoring](case-studies/05-realtime-speed-to-lead-qualification.md)** | Inbound webhooks, negative prompting, Slack automation | **Sub-20s response SLA** (down from 4.2 hours), zero unqualified calendar bloat |
 | **06** | **[Deterministic Telemetry & Master Governance Engine](case-studies/06-deterministic-telemetry-and-governance.md)** | Cryptographic SHA-256 receipts, automated pre-flight URL gates | **Zero ghost tasks**, empirical proof standard for all production executions |
 | **07** | **[Real Estate Acquisition AI Ops & Speed-to-Lead Engine](case-studies/07-real-estate-acquisition-ai-ops-engine.md)** | Playwright CDP, Telegram Bot, 0-cost waterfall skip-trace, Google Sheets CRM | **$0/mo data costs**, 92% phone match rate, <120s lead-to-call response |
+| **08** | **[The Autonomous Intelligence Newsroom](case-studies/08-autonomous-intelligence-newsroom-the-lantern-daily.md)** | Next.js 15, Gemini 3.8 Flash, Telegram HITL, Supabase RLS, Yahoo & CoinGecko APIs | **99.7% cost reduction** (<$30/mo vs $192K/yr editorial staff), live edge sync, 0 unvetted articles |
 
 ---
 
