@@ -21,6 +21,8 @@ Architected, built, and deployed an autonomous media intelligence platform and l
 
 ## 2. Visual Architecture & Pipeline Flow
 
+![The Lantern Daily Production Architecture](../assets/lantern-daily/08-the-lantern-daily-newsroom.png)
+
 ```mermaid
 flowchart TD
     subgraph Ingestion["1. Multi-Source Wire Radar"]
