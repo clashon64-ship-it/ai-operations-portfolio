@@ -70,6 +70,16 @@ Ready-to-import enterprise automation schemas located in [`workflows/`](workflow
 
 ---
 
+## Live Production Systems & Verified Edge Deployments
+
+Empirical proof of automated client systems, high-speed lead funnels, and autonomous edge deployments running in live production:
+
+| System / Platform | Core Architecture | Live Production URL | Deployment Engine | Verification Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Giovanni Texas Acquisitions Platform** | High-conversion speed-to-lead acquisition funnel deployed to Netlify edge with custom domain SSL and automated webhook ingest. | [https://giovannihomesolutions.com](https://giovannihomesolutions.com) | Netlify Edge Static | **`VERIFIED LIVE`** |
+
+---
+
 ## Core Technical Competencies
 
 | Domain | Production Tooling & Protocols |
