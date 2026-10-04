@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penn Enterprises LLC | San Diego AI Automation & Operations Engineering</title>
+  <meta name="description" content="San Diego enterprise AI automation agency. We build autonomous speed-to-lead engines, workflow automation, and custom operations infrastructure for California businesses.">
+  <link rel="canonical" href="https://pennenterpriseshq.com/san-diego">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Structured Data: Local Business and Professional Service Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Penn Enterprises LLC",
+    "alternateName": "Penn Enterprises AI Operations",
+    "image": "https://pennenterpriseshq.com/assets/logo.png",
+    "@id": "https://pennenterpriseshq.com/#sandiego-office",
+    "url": "https://pennenterpriseshq.com/san-diego",
+    "telephone": "+1-800-555-0199",
+    "email": "kp@pennenterprisesllc.com",
+    "priceRange": "$$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Diego",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 32.7157,
+      "longitude": -117.1611
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "San Diego"
+      },
+      {
+        "@type": "City",
+        "name": "La Jolla"
+      },
+      {
+        "@type": "City",
+        "name": "Rancho Santa Fe"
+      },
+      {
+        "@type": "City",
+        "name": "Point Loma"
+      },
+      {
+        "@type": "City",
+        "name": "Del Mar"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "San Diego County"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "San Diego AI Automation Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Luxury Real Estate 60-Second Speed-to-Lead Engine",
+            "description": "Autonomous inquiry qualification, funds verification, and private showing dispatch for high-value coastal listings."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "B2B Workflow & Operations Automation",
+            "description": "Production n8n and Make pipelines eliminating manual administrative friction and connecting legacy CRMs to modern LLMs."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Autonomous Lead Scraping & Multi-Channel Enrichment",
+            "description": "Deterministic B2B prospecting engines with multi-point email validation and CRM auto-population."
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #0B0B0B;
+      --card-bg: #121212;
+      --card-inner: #181818;
+      --card-border: #242424;
+      --gold-primary: #C9A227;
+      --gold-light: #E5C058;
+      --gold-glow: rgba(201, 162, 39, 0.2);
+      --text-white: #FFFFFF;
+      --text-muted: #8E95A2;
+      --text-dim: #5A606E;
+      --accent-green: #10B981;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 3rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+      color: #000000;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .location-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201, 162, 39, 0.1);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .hero-section {
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: 3.25rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+      color: #000000;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--gold-glow);
+    }
+
+    .btn-secondary {
+      background: var(--card-inner);
+      color: var(--text-white);
+      border: 1px solid var(--card-border);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: #202020;
+      border-color: var(--gold-primary);
+    }
+
+    .grid-section {
+      margin-top: 4rem;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-eyebrow {
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-3px);
+    }
+
+    .card-metric {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      background: var(--card-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .form-wrapper {
+      margin-top: 5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--gold-primary);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .form-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: var(--card-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: var(--text-white);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+      color: #000000;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--gold-glow);
+    }
+
+    .submission-status {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .status-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    footer {
+      margin-top: 6rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-quote {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.25rem;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .form-wrapper {
+        padding: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand-group">
+        <div class="brand-badge">PE</div>
+        <div class="brand-title">Penn Enterprises LLC</div>
+      </div>
+      <div class="location-tag">
+        <span>📍</span> SAN DIEGO, CA
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section">
+        <div class="hero-eyebrow">Enterprise AI Operations and Workflow Automation</div>
+        <h1 class="hero-title">
+          Scale San Diego Business Operations with <span>Autonomous AI Infrastructure</span>
+        </h1>
+        <p class="hero-desc">
+          We replace manual administrative bottlenecks, delayed lead response times, and scattered software with deterministic AI automation engines engineered for San Diego enterprises.
+        </p>
+        <div class="hero-ctas">
+          <a href="#audit-form" class="btn-gold">Request 15-Min Operational Audit</a>
+          <a href="https://cal.com/pennenterprises/15min" target="_blank" rel="noopener" class="btn-secondary">Book Live Strategy Call</a>
+        </div>
+      </section>
+
+      <section class="grid-section">
+        <div class="section-header">
+          <div class="section-eyebrow">Proven Systems in Production</div>
+          <h2 class="section-title">High-Impact Local Deployments</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-metric">&lt;60s</div>
+            <div class="card-title">Luxury Real Estate Speed-to-Lead</div>
+            <div class="card-desc">
+              Deployed across high-value coastal listings in Santaluz, Point Loma, and Rancho Santa Fe. The system engages buyer inquiries within 60 seconds across SMS and web, verifies proof of funds, and schedules private showings on the broker's calendar without phone tag.
+            </div>
+            <div class="pill-list">
+              <span class="pill">FastMCP</span>
+              <span class="pill">n8n Engine</span>
+              <span class="pill">SMS Webhook</span>
+              <span class="pill">MLS Ingestion</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-metric">10x</div>
+            <div class="card-title">CSLB Contractor Intake & Dispatch</div>
+            <div class="card-desc">
+              Automated bid intake and crew dispatch for licensed Southern California specialty contractors. Incoming project inquiries are verified against California state licensing records, scoped automatically, and routed to project managers with instant estimate drafts.
+            </div>
+            <div class="pill-list">
+              <span class="pill">State Registry API</span>
+              <span class="pill">Doc Extraction</span>
+              <span class="pill">Slack Ops Dispatch</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-metric">100%</div>
+            <div class="card-title">B2B Prospecting & Lead Enrichment</div>
+            <div class="card-desc">
+              Deterministic scraping and multi-channel enrichment engine. Identifies high-intent local companies, validates business email records through live MX checks, and populates CRM pipelines with complete executive intelligence.
+            </div>
+            <div class="pill-list">
+              <span class="pill">Apify Scraper</span>
+              <span class="pill">MX Ping Gate</span>
+              <span class="pill">Zero-Dash Outreach</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="audit-form" class="form-wrapper">
+        <h2 class="form-title">San Diego Operations Audit</h2>
+        <p class="form-subtitle">
+          Submit your current operational bottlenecks. We evaluate your workflow and deliver an architectural blueprint showing where AI automation recovers 15+ hours weekly.
+        </p>
+
+        <form id="sdLeadForm">
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="fullName">Full Name</label>
+              <input type="text" id="fullName" class="form-input" placeholder="e.g. John Cabral" required>
+            </div>
+            <div>
+              <label class="form-label" for="businessEmail">Business Email</label>
+              <input type="email" id="businessEmail" class="form-input" placeholder="e.g. john@brokerage.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="companyName">Company or Practice</label>
+              <input type="text" id="companyName" class="form-input" placeholder="e.g. Pacific Coast Operations" required>
+            </div>
+            <div>
+              <label class="form-label" for="marketVertical">Primary Sector</label>
+              <select id="marketVertical" class="form-select" required>
+                <option value="" disabled selected>Select industry</option>
+                <option value="luxury_real_estate">Luxury Real Estate & Brokerage</option>
+                <option value="contractor_trade">CSLB Construction & Specialty Trades</option>
+                <option value="medical_spa">Medical Practice / Aesthetics</option>
+                <option value="professional_b2b">Legal, Financial & Professional B2B</option>
+                <option value="other">Other High-Ticket Services</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="primaryBottleneck">Primary Operational Bottleneck</label>
+            <textarea id="primaryBottleneck" class="form-textarea" placeholder="Describe the manual process consuming your team's time (e.g., slow lead follow up, manual data entry between platforms, scheduling friction)." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Request Confidential Audit</button>
+
+          <div id="statusMessage" class="submission-status"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        Penn Enterprises LLC &bull; Registered California AI Operations & Automation Practice
+      </div>
+      <div class="footer-quote">
+        While they wait on permission, we already have the Penn. ⚡
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('sdLeadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const statusBox = document.getElementById('statusMessage');
+      
+      const payload = {
+        fullName: document.getElementById('fullName').value.trim(),
+        businessEmail: document.getElementById('businessEmail').value.trim(),
+        companyName: document.getElementById('companyName').value.trim(),
+        marketVertical: document.getElementById('marketVertical').value,
+        primaryBottleneck: document.getElementById('primaryBottleneck').value.trim(),
+        marketLocation: "San Diego, CA",
+        timestamp: new Date().toISOString()
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Transmitting Audit Request...";
+
+      try {
+        /* In production, routes directly to Penn Enterprises verified webhook */
+        console.log("Staged San Diego Lead Payload:", payload);
+        
+        statusBox.className = "submission-status status-success";
+        statusBox.style.display = "block";
+        statusBox.innerText = "Audit request received. Keymon Penn and the operations team will review your workflow within 4 business hours.";
+        
+        document.getElementById('sdLeadForm').reset();
+      } catch (err) {
+        statusBox.className = "submission-status";
+        statusBox.style.display = "block";
+        statusBox.style.color = "#EF4444";
+        statusBox.innerText = "Submission failed. Please contact kp@pennenterprisesllc.com directly.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Request Confidential Audit";
+      }
+    });
+  </script>
+</body>
+</html>
