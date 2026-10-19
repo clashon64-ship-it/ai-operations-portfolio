@@ -84,9 +84,9 @@ Empirical proof of automated client systems, high-speed lead funnels, and autono
 
 | Domain | Production Tooling & Protocols |
 | :--- | :--- |
-| **Agent & Workflow Orchestration** | Python (`asyncio`, `multiprocessing`), FastMCP (`stdio` / HTTP), n8n (Self-Hosted Docker), Make.com, LangChain |
+| **Agent & Multi-Agent Orchestration** | Google Agent Development Kit (ADK), FastMCP (`stdio` / HTTP), n8n (Self-Hosted Docker), Python (`asyncio`, `multiprocessing`), Make.com, LangChain |
 | **Performance & Event Systems** | Low-latency event queues, sub-millisecond dispatching (p50: 0.012ms), Redis pub/sub, rate limiting |
-| **LLM Evaluation & Quality Control**| Automated LLM-as-a-Judge gates, structured JSON Schema output, negative prompting (`SYS-MOD-NEG-001`) |
+| **LLM Evaluation & Quality Control**| Automated LLM-as-a-Judge gates, structured JSON Schema output, negative prompting (`SYS-MOD-NEG-001`), ADK `LoopAgent` validation |
 | **Enterprise Infrastructure** | Docker, Docker Compose, Linux VPS (Ubuntu), Nginx reverse proxy, Let's Encrypt SSL/TLS, UFW firewall |
 | **Data & Integrations** | RESTful APIs, Webhook ingestion engines, Google Workspace APIs, PostgreSQL, IMAP/SMTP automation |
 
