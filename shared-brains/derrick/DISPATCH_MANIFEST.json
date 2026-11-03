@@ -1,0 +1,20 @@
+{
+  "partner_id": "BROTHER_DERRICK",
+  "partner_name": "Derrick McCullough",
+  "github_handle": "derrickmccullough34-blip",
+  "shared_brain_version": "2026.1",
+  "last_synced_utc": "2026-11-03T20:13:00Z",
+  "dispatched_items": [
+    {
+      "item_id": "TASK_DERRICK_001",
+      "title": "Autonomous Video Editing Agent Starter Kit",
+      "category": "BLUEPRINT_AND_SKILL",
+      "sender": "Keymon Penn (Penn Enterprises LLC)",
+      "target_file": "agent_video_starter_package.md",
+      "dispatched_at_utc": "2026-11-03T20:13:00Z",
+      "status": "AVAILABLE_FOR_PULL",
+      "priority": "HIGH",
+      "notes": "Starter kit containing SKILL.md, video_preferences.json, and video_agent_engine.py for autonomous 9:16 mobile editing."
+    }
+  ]
+}
