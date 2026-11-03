@@ -1,0 +1,51 @@
+{
+  "profile_name": "High Velocity Social Reels",
+  "creator_name": "Derrick",
+  "brand_name": "Viral Media",
+  "aspect_ratio": "9:16",
+  "resolution": "1080x1920",
+  "fps": 30,
+  "branding": {
+    "lower_third_enabled": false
+  },
+  "typography": {
+    "font_family": "Bebas Neue",
+    "max_words_per_line": 3,
+    "safe_zone_y_offset": -0.38,
+    "colors": {
+      "base_text": "#FFFFFF",
+      "active_highlight": "#FFDD00",
+      "stroke_color": "#000000",
+      "stroke_width": 3
+    },
+    "animation_style": "word_by_word_bump"
+  },
+  "pacing_and_cutting": {
+    "silence_trimming": {
+      "auto_trim_enabled": true,
+      "silence_threshold_seconds": 0.35,
+      "padding_head_seconds": 0.03,
+      "padding_tail_seconds": 0.03
+    },
+    "pattern_interrupts": {
+      "cadence_seconds_range": "2.0 to 2.8",
+      "punch_in_scale": 1.18,
+      "punch_in_easing": "ease_in_out",
+      "b_roll_overlay_track": 1
+    }
+  },
+  "audio_profile": {
+    "dialogue_target_lufs": -13.0,
+    "dialogue_true_peak_db": -1.0,
+    "background_music_active_db": -20.0,
+    "background_music_intro_db": -12.0,
+    "sfx_target_db": -8.0
+  },
+  "export_constraints": {
+    "max_file_size_mb": 20.0,
+    "codec": "libx264",
+    "audio_codec": "aac",
+    "preset": "fast",
+    "crf": 22
+  }
+}

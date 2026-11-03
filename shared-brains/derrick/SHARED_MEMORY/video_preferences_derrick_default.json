@@ -1,0 +1,65 @@
+{
+  "profile_name": "Derrick McCullough Personal Brand",
+  "creator_name": "Derrick",
+  "brand_name": "Derrick Media",
+  "aspect_ratio": "9:16",
+  "resolution": "1080x1920",
+  "fps": 30,
+  "branding": {
+    "lower_third_enabled": true,
+    "card_background": "rgba(15, 23, 42, 0.88)",
+    "card_border_accent": "#38BDF8",
+    "card_border_width": "2px",
+    "card_radius": "16px",
+    "primary_title": "DERRICK",
+    "subtitle": "CREATOR & OPERATING PARTNER",
+    "timing": {
+      "in_timestamp_seconds": 2.5,
+      "duration_seconds": 4.5
+    },
+    "coordinates": {
+      "x": "center",
+      "y_pixels": 1580
+    }
+  },
+  "typography": {
+    "font_family": "Montserrat Bold",
+    "max_words_per_line": 4,
+    "safe_zone_y_offset": -0.42,
+    "colors": {
+      "base_text": "#FFFFFF",
+      "active_highlight": "#38BDF8",
+      "stroke_color": "#000000",
+      "stroke_width": 2
+    },
+    "animation_style": "word_by_word_bump"
+  },
+  "pacing_and_cutting": {
+    "silence_trimming": {
+      "auto_trim_enabled": true,
+      "silence_threshold_seconds": 0.45,
+      "padding_head_seconds": 0.05,
+      "padding_tail_seconds": 0.05
+    },
+    "pattern_interrupts": {
+      "cadence_seconds_range": "2.5 to 3.5",
+      "punch_in_scale": 1.12,
+      "punch_in_easing": "ease_in_out",
+      "b_roll_overlay_track": 1
+    }
+  },
+  "audio_profile": {
+    "dialogue_target_lufs": -14.0,
+    "dialogue_true_peak_db": -1.5,
+    "background_music_active_db": -22.0,
+    "background_music_intro_db": -14.0,
+    "sfx_target_db": -12.0
+  },
+  "export_constraints": {
+    "max_file_size_mb": 20.0,
+    "codec": "libx264",
+    "audio_codec": "aac",
+    "preset": "medium",
+    "crf": 23
+  }
+}
