@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penn Enterprises | Loved Ones AI Skill Studio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #0B0B0B; color: #FFFFFF; padding: 32px 16px; display: flex; justify-content: center; }
+    .container { max-width: 760px; width: 100%; background: #141414; border: 1px solid #262626; border-radius: 16px; padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+    .header { text-align: center; margin-bottom: 32px; border-bottom: 1px solid #262626; padding-bottom: 24px; }
+    .badge { display: inline-block; background: rgba(201, 162, 39, 0.15); border: 1px solid #C9A227; color: #C9A227; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+    h1 { font-size: 28px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px; }
+    p.subtitle { color: #9CA3AF; font-size: 15px; line-height: 1.5; }
+    
+    .step-card { background: #1C1C1C; border: 1px solid #333333; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .step-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: #FFFFFF; margin-bottom: 12px; }
+    .step-number { background: #C9A227; color: #0B0B0B; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; }
+
+    .dropzone { border: 2px dashed #404040; border-radius: 12px; padding: 36px 20px; text-align: center; background: #111111; cursor: pointer; transition: all 0.2s ease; }
+    .dropzone:hover { border-color: #C9A227; background: rgba(201, 162, 39, 0.05); }
+    .drop-icon { font-size: 40px; margin-bottom: 12px; }
+    .drop-text { font-size: 16px; font-weight: 600; color: #FFFFFF; }
+    .drop-sub { font-size: 13px; color: #6B7280; margin-top: 4px; }
+
+    .style-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .style-btn { background: #111111; border: 1px solid #333333; border-radius: 10px; padding: 16px 12px; text-align: center; cursor: pointer; transition: all 0.2s; color: #FFFFFF; }
+    .style-btn.active { border-color: #C9A227; background: rgba(201, 162, 39, 0.1); }
+    .style-icon { font-size: 24px; margin-bottom: 6px; }
+    .style-name { font-size: 14px; font-weight: 700; }
+    .style-desc { font-size: 11px; color: #9CA3AF; margin-top: 4px; }
+
+    .action-btn { width: 100%; background: #C9A227; color: #0B0B0B; border: none; padding: 16px; border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; margin-top: 8px; }
+    .action-btn:hover { background: #DDB332; transform: translateY(-1px); }
+
+    .terminal-box { background: #000000; border: 1px solid #333333; border-radius: 8px; padding: 16px; font-family: monospace; font-size: 13px; color: #22C55E; margin-top: 16px; display: none; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">Zero Code Operator Studio</div>
+      <h1>AI Video Creation Studio</h1>
+      <p class="subtitle">Designed for friends and family to operate powerful AI editing skills in 1 click.</p>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <div class="step-number">1</div>
+        <span>Select Your Raw Video Recording</span>
+      </div>
+      <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+        <div class="drop-icon">🎬</div>
+        <div class="drop-text" id="fileText">Click to choose or drop your video file here</div>
+        <div class="drop-sub">Accepts iPhone takes, Android clips, or screen recordings (.mp4, .mov)</div>
+        <input type="file" id="fileInput" style="display: none;" accept="video/*" onchange="handleFile(this.files)">
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <div class="step-number">2</div>
+        <span>Pick Your Content Style</span>
+      </div>
+      <div class="style-grid">
+        <div class="style-btn active" onclick="selectStyle(this, 'tiktok')">
+          <div class="style-icon">📱</div>
+          <div class="style-name">Social Reel</div>
+          <div class="style-desc">9:16 vertical, snappy 3-second cuts, loud speech</div>
+        </div>
+        <div class="style-btn" onclick="selectStyle(this, 'executive')">
+          <div class="style-icon">💼</div>
+          <div class="style-name">Executive Talk</div>
+          <div class="style-desc">Crisp lower-third badge, gold accents, clean tone</div>
+        </div>
+        <div class="style-btn" onclick="selectStyle(this, 'tutorial')">
+          <div class="style-icon">💻</div>
+          <div class="style-name">Tech Walkthrough</div>
+          <div class="style-desc">Split screen, zoomed UI details, music ducked</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <div class="step-number">3</div>
+        <span>Launch Autonomous Agent Edit</span>
+      </div>
+      <p style="font-size: 13px; color: #9CA3AF; margin-bottom: 12px;">Your AI agent automatically center-crops to vertical mobile, strips dead air pauses, normalizes speech to -14 LUFS, and compresses under 20MB for fast phone streaming.</p>
+      <button class="action-btn" onclick="runAgent()">⚡ Click to Run Agent Edit</button>
+      <div class="terminal-box" id="terminal">
+        > Agent initialized...<br>
+        > Ingesting selected file: <span id="targetFile">take_01.mp4</span><br>
+        > Applying 1080x1920 9:16 vertical crop...<br>
+        > Normalizing dialogue audio to -14 LUFS...<br>
+        > Clamping file payload under 20MB...<br>
+        > [SUCCESS] Export complete in 04_EXPORTS/take_01_edited.mp4 ✨
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedFileName = "take_01.mp4";
+    function handleFile(files) {
+      if (files.length > 0) {
+        selectedFileName = files[0].name;
+        document.getElementById('fileText').innerText = "Selected: " + selectedFileName;
+        document.getElementById('targetFile').innerText = selectedFileName;
+      }
+    }
+    function selectStyle(el, style) {
+      document.querySelectorAll('.style-btn').forEach(btn => btn.classList.remove('active'));
+      el.classList.add('active');
+    }
+    function runAgent() {
+      const term = document.getElementById('terminal');
+      term.style.display = "block";
+    }
+  </script>
+</body>
+</html>
